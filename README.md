@@ -32,4 +32,3 @@ you can follow the following steps to run this application:
 ## Status
 version: 1.0.1
 The app is in production currently.
-
