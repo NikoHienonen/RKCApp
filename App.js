@@ -3,12 +3,14 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import { ScreenOrientation } from 'expo';
 
+import Game from './components/Game';
+
 export default function App() {
   // Lock screen to landscape
   ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Game/>
     </View>
   );
 }
