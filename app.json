@@ -24,7 +24,11 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.nikoh.rkcapp",
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.nikoh.rkcapp"
     }
   }
 }
