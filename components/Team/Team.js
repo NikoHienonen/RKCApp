@@ -35,7 +35,7 @@ export default class Team extends Component {
           onPress={() => this.DeletePoint()}>
           <Text style={styles.minusPointText}>-1</Text>
         </TouchableOpacity>
-    <Text style={styles.name}>{this.state.name}</Text>
+        <Text style={styles.name}>{this.state.name}</Text>
       </View>
     )
   }
