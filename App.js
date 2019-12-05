@@ -1,25 +1,14 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {createAppContainer} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
 
-import { ScreenOrientation } from 'expo';
+import GameScreen from './components/GameScreen';
+import EndScreen from './components/EndScreen';
 
-import Game from './components/Game';
-
-export default function App() {
-  // Lock screen to landscape
-  ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
-  return (
-    <View style={styles.container}>
-      <Game/>
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+const MainNavigator = createStackNavigator({
+  Game: {screen: GameScreen},
+  End: {screen: EndScreen},
 });
+
+const App = createAppContainer(MainNavigator);
+
+export default App;
