@@ -48,12 +48,12 @@ const styles = StyleSheet.create({
   points: {
     backgroundColor: 'orange',
     padding: 20,
-    minWidth: 100,
+    minWidth: 120,
     alignContent: 'center',
     marginVertical: 10
   },
   pointsText: {
-    fontSize: 40,
+    fontSize: 50,
     color: 'white',
     textAlign: 'center'
   },
