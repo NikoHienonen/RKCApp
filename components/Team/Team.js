@@ -8,34 +8,25 @@ import {
 } from 'react-native';
 
 export default class Team extends Component {
-  state = this.props.state;
-
-  AddPoint = () => {
-    let points = this.state.points + 1
-    this.setState({points});
-    if(points === 2) {
-      this.props.roundWon(this.state.name);
-    };
-  }
-  DeletePoint = () => {
-    if(this.state.points !== 0) {
-      let points = this.state.points -1;
-      this.setState({points});
-    }
+  state = {
+    points: 0,
+    rounds: 0,
+    timeOuts: 2,
+    serve: false,
   }
   render() {
-    const { name, points } = this.state;
+    const { points } = this.props;
     return (
       <View style={styles.container}>
         <TouchableOpacity style={styles.points}
-          onPress={() => this.AddPoint()}>
+          onPress={() => this.props.AddPoint(this.props.name)}>
           <Text style={styles.pointsText}>{points.toString()}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.minusPoint}
-          onPress={() => this.DeletePoint()}>
+          onPress={() => this.props.DeletePoint(this.props.name)}>
           <Text style={styles.minusPointText}>-1</Text>
         </TouchableOpacity>
-        <Text style={styles.name}>{this.state.name}</Text>
+        <Text style={styles.name}>{this.props.name}</Text>
       </View>
     )
   }
