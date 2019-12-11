@@ -12,7 +12,7 @@ export default function AddPoint(props) {
 
 const styles = StyleSheet.create({
   points: {
-    backgroundColor: 'orange',
+    backgroundColor: '#F58100',
     padding: 20,
     minWidth: 120,
     alignContent: 'center',
