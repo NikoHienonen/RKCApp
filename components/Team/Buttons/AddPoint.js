@@ -14,12 +14,11 @@ const styles = StyleSheet.create({
   points: {
     backgroundColor: '#F58100',
     padding: 20,
-    minWidth: 120,
-    alignContent: 'center',
-    marginVertical: 10
+    minWidth: 180,
+    alignContent: 'center'
   },
   pointsText: {
-    fontSize: 50,
+    fontSize: 100,
     color: 'white',
     textAlign: 'center'
   },

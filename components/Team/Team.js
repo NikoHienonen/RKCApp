@@ -36,19 +36,23 @@ export default class Team extends Component {
       <View style={styles.row}>
         <AddPoint points={points} name={this.props.name} 
         AddPoint={this.props.AddPoint}/>
-        <View style={styles.column}>
+        <View style={[styles.column, styles.buttonColumn]}>
           {this.renderServe()}
           <Timeout />
           <Timeout />
+          <DeletePoint name={this.props.name} 
+        DeletePoint={this.props.DeletePoint}/>
         </View>
       </View>
     )
     :(
       <View style={styles.row}>
-        <View style={styles.column}>
+        <View style={[styles.column, styles.buttonColumn]}>
           {this.renderServe()}
           <Timeout />
           <Timeout />
+          <DeletePoint name={this.props.name} 
+        DeletePoint={this.props.DeletePoint}/>
         </View>
         <AddPoint points={points} name={this.props.name} 
         AddPoint={this.props.AddPoint}/>
@@ -60,8 +64,6 @@ export default class Team extends Component {
     return (
       <View style={styles.container}>
         {this.renderMirror(points)}
-        <DeletePoint name={this.props.name} 
-        DeletePoint={this.props.DeletePoint}/>
       </View>
     )
   }
@@ -69,13 +71,17 @@ export default class Team extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    margin: 10 
+    marginVertical: 20
   },
   row: {
     flexDirection: 'row'
   },
   column: {
     flexDirection: 'column'
+  },
+  buttonColumn: {
+    justifyContent: 'space-between',
+    marginHorizontal: 10,
   },
   servePlaceholder: {
     height: 40,

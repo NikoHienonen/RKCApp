@@ -4,7 +4,7 @@ import { View, TextInput, StyleSheet } from 'react-native';
 export default function Input(props) {
   const { placeholder, value, onChangeText, name } = props;
   return (
-    <View style={styles.inputContainer}>
+    <View style={[styles.inputContainer, props.marginSide === 'right' ? {marginLeft: 10} : {marginRight: 10}]}>
       <TextInput value={value} placeholder={placeholder} style={styles.input}
       onChangeText={text => onChangeText(name, text)}/>
     </View>
@@ -13,11 +13,15 @@ export default function Input(props) {
 
 const styles = StyleSheet.create({
   inputContainer: {
-    flex: 1
+    flex: 1,
+    justifyContent:'center',
   },
   input: {
     alignSelf: 'stretch',
-    borderColor: 'white',
-    borderWidth: 1
+    backgroundColor: 'white',
+    fontSize: 20,
+    color: 'black',
+    lineHeight: 40,
+    paddingHorizontal: 5,
   }
 });

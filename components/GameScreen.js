@@ -12,6 +12,8 @@ export default class GameScreen extends Component {
   */
   static navigationOptions = {
     title: 'RKC-Volley App',
+    headerStyle: { backgroundColor: '#413E3A'},
+    headerTitleStyle: { color: 'orange' }
   };
   componentDidMount() {
     ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
@@ -20,11 +22,15 @@ export default class GameScreen extends Component {
     const {navigate} = this.props.navigation;
     navigate('End', {gameStats});
   } 
-  
   render() {
+    const { navigation } = this.props;
+    let maxPoints = navigation.getParam('maxPoints');
+    let maxRounds = navigation.getParam('maxRounds');
+    let bestOfMaxRounds = navigation.getParam('bestOfMaxRounds');
     return (
       <View style={styles.container}>
-        <Teams RoundOver={this.RoundOver}/>
+        <Teams maxPoints={maxPoints} maxRounds={maxRounds} 
+        bestOfMaxRounds={bestOfMaxRounds} GameOver={this.GameOver}/>
       </View>
     )
   }
@@ -34,5 +40,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#413E3A',
-  }
+  },
+
 });
