@@ -11,7 +11,7 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/rkc_logo.jpg",
+    "icon": "./assets/rkc_logo.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
