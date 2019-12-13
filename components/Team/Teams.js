@@ -158,6 +158,7 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     justifyContent: 'flex-end',
+    margin: 'auto'
   },
   mainContainer: {
     marginHorizontal: 30,
