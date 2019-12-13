@@ -4,24 +4,21 @@ import { View, StyleSheet, Text } from 'react-native';
 import Team from './Team';
 import Input from './Input';
 
-export default class componentName extends Component {
+export default class Teams extends Component {
   state = {
-    team1: 'Team1',
-    team2: 'Team2',
-    team1Points: 0,
-    team2Points: 0,
-    roundsWon: [0, 0],
-    roundStatistics: [],
-    serveOnTeam1: true
+    team1: 'Team1',       // Name of team1
+    team2: 'Team2',       // Name of team2
+    team1Points: 0,       // Points of team1
+    team2Points: 0,       // Points of team1
+    roundsWon: [0, 0],    // A list of how many rounds each team has won.
+    roundStatistics: [],  // A list of how many points each team got in a rounds
+    serveOnTeam1: true    // Is team1 serving
+  }
+  componentDidMount() {
+    let rounds = this.props.maxRounds;
+    console.log(typeof rounds)
   }
   EndRound = (winner) => {
-    /*
-    * 1.selvitä kuka voitti erän
-    * 2. Lisää em. joukkueelle yksi eräpiste
-    * 3. tallenna pisteet erälistaan
-    * 4. nollaa joukkueiden pisteet
-    */
-   console.log(winner)
     let index = winner === 'team1' ? 0 : 1;
     let roundsTable = this.state.roundsWon;
     roundsTable[index] = roundsTable[index] + 1;
@@ -44,14 +41,13 @@ export default class componentName extends Component {
     let returnValue = false;
     const { maxRounds, bestOfMaxRounds} = this.props;
     const { roundsWon } = this.state;
-    console.log(maxRounds)
+    let numberMaxRounds = Number(maxRounds);
     if(bestOfMaxRounds) {
-      if(roundsWon.includes(maxRounds+0)){
-        console.log('winner found')
+      if(roundsWon.includes(numberMaxRounds)){
         returnValue = true;
       }
     } else {
-      if(roundsWon[0] + roundsWon[1] === maxRounds) {
+      if(roundsWon[0] + roundsWon[1] === numberMaxRounds) {
         returnValue = true;
       }
     }
@@ -71,7 +67,6 @@ export default class componentName extends Component {
   AddPoint = (team) => {
     if(team === 'team1') {
       let team1Points = this.state.team1Points + 1
-      console.log(team1Points)
       if(!this.state.serveOnTeam1){
         this.setState({serveOnTeam1: true});
       }
