@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { ScreenOrientation } from 'expo';
 
 import PreGameForm from './PreGameForm';
-import { withOrientation } from 'react-navigation';
 
 export default class PreGameScreen extends Component {
   static navigationOptions = ({navigation}) => {
@@ -16,7 +15,7 @@ export default class PreGameScreen extends Component {
   };
   state = {
     maxPoints: 3, 
-    maxRounds: 2, 
+    maxRounds: 4, 
     bestOfMaxRounds: false
   }
   componentDidMount() {

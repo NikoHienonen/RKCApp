@@ -1,27 +1,14 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
-export default class Timeout extends Component {
-  state = {
-    used: false
-  } 
-  getStyle = () => {
-    return this.state.used 
-    ? styles.notUsed
-    : styles.used
-  }
-  Toggle = () => {
-    this.setState(prevState => ({
-      used: !prevState.used
-    }));
-  }
-  render() {
-    return (
-      <TouchableOpacity style={[this.getStyle(), styles.circle]} onPress={() => this.Toggle()}>
-        <Text style={styles.text}>T</Text>
-      </TouchableOpacity>
-    );
-  }
+export default function Timeout() {
+  const [used, toggleUsed] = useState(false);
+  return (
+    <TouchableOpacity style={[used ? styles.notUsed : styles.used, styles.circle]} 
+      onPress={() => toggleUsed(!used)}>
+      <Text style={styles.text}>T</Text>
+    </TouchableOpacity>
+  );
 }
 
 const styles = StyleSheet.create({
