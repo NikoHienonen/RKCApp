@@ -65,13 +65,14 @@ export default class Teams extends Component {
     return stats;
   }
   AddPoint = (team) => {
+    let maxPointsNum = Number(this.props.maxPoints);
     if(team === 'team1') {
       let team1Points = this.state.team1Points + 1
       if(!this.state.serveOnTeam1){
         this.setState({serveOnTeam1: true});
       }
       this.setState({team1Points}, () => {
-        if(team1Points === this.props.maxPoints || team1Points > this.props.maxPoints) {
+        if(team1Points === maxPointsNum) {
           this.EndRound('team1');
         }
       });
@@ -81,7 +82,7 @@ export default class Teams extends Component {
         this.setState({serveOnTeam1: false});
       }
       this.setState({team2Points}, () => {
-        if(team2Points === this.props.maxPoints || team2Points > this.props.maxPoints) {
+        if(team2Points === maxPointsNum) {
           this.EndRound('team2');
         }
       });
