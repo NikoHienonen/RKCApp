@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, Button } from 'react-native';
 import { ScreenOrientation } from 'expo';
 
-import Teams from './Team/Teams';
+import Teams from '../Team/Teams';
 
 export default class GameScreen extends Component {
   /*
