@@ -1,24 +1,24 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-import Login from '../Login/Login';
 
-
-export default class GameScreen extends Component {
+export default class TournamentScreen extends Component {
   static navigationOptions = ({navigation}) => {
     //let repo = navigation.getParam('gameStarts');
     return {
-      title: 'Login',
+      title: 'Tournaments',
       headerStyle: { backgroundColor: '#413E3A'},
       headerTintColor: 'orange' 
     };
   };
-  navigate = () => {
-    console.log('navigate')
-    this.props.navigation.navigate('Tournament', {});
-  }
+ navigate = (prop) => {
+   const { navigate } = this.props.navigation;
+   navigate(prop);
+ }
   render(){
-    return <Login navigate={this.navigate}/>
+    return <View style={styles.container}>
+      <Text>Tournaments</Text>
+    </View>
   }
 }
 

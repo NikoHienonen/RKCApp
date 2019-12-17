@@ -3,7 +3,7 @@ import { View,Text,  StyleSheet, Image, KeyboardAvoidingView } from 'react-nativ
 
 import LoginForm from './LoginForm';
 
-export default function Login() {
+export default function Login({navigate}) {
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.container}>
       <View style={styles.imgContainer}>
@@ -14,7 +14,7 @@ export default function Login() {
          </Text>
       </View>
       <View style={styles.form}>
-        <LoginForm />
+        <LoginForm navigate={navigate}/>
       </View>
     </KeyboardAvoidingView>
   );

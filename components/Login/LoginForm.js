@@ -9,16 +9,17 @@ const INITIAL_STATE = {
   password: ''
 }
 
-export default function LoginForm() {
+export default function LoginForm({navigate}) {
   const {
     handleChange, handleBlur, submit, errors, values, isSubmitting
-  } = FormHandler(INITIAL_STATE, ValidateValues);
+  } = FormHandler(INITIAL_STATE, ValidateValues, navigate);
 
   return (
     <View style={styles.container}>
       <TextInput 
+        name="username"
         value={values.username}
-        onChange={handleChange}
+        onChangeText={text => handleChange(text, "username")}
         onBlur={handleBlur}
         placeholder='Username'
         placeholderTextColor='rgba(255,255,255,0.6)'
@@ -30,8 +31,9 @@ export default function LoginForm() {
       />
       <Text style={styles.errorMsg}>{errors.username}</Text>
       <TextInput 
+        name="password"
         value={values.password}
-        onChange={handleChange}
+        onChangeText={text => handleChange(text, "password")}
         onBlur={handleBlur}
         placeholder='Password'
         placeholderTextColor='rgba(255,255,255,0.6)'
@@ -58,7 +60,6 @@ const styles = StyleSheet.create({
   input: {
     height: 40,
     backgroundColor: 'rgba(255,255,255,0.2)',
-    marginBottom: 10,
     paddingHorizontal: 10,
     color: '#FFF',
     fontSize: 20
@@ -75,6 +76,6 @@ const styles = StyleSheet.create({
   errorMsg: {
     color: 'red',
     fontSize: 20,
-    paddingVertical: 10
+    paddingBottom: 10
   }
 })

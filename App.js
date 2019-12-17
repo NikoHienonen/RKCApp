@@ -3,6 +3,7 @@ import {createStackNavigator} from 'react-navigation-stack';
 
 import IntroScreen from './components/Screens/IntroScreen';
 import LoginScreen from './components/Screens/LoginScreen';
+import TournamentScreen from './components/Screens/TournamentScreen';
 import PreGameScreen from './components/Screens/PreGameScreen';
 import GameScreen from './components/Screens/GameScreen';
 import EndScreen from './components/Screens/EndScreen';
@@ -10,6 +11,7 @@ import EndScreen from './components/Screens/EndScreen';
 const MainNavigator = createStackNavigator({
   Intro: {screen: IntroScreen},
   Login: {screen: LoginScreen},
+  Tournament: {screen: TournamentScreen},
   PreGame: {screen: PreGameScreen},
   Game: {screen: GameScreen},
   End: {screen: EndScreen},

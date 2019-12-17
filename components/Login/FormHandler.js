@@ -1,17 +1,17 @@
 import { useState, useEffect } from 'react'
 
-export default function FormHandler(initialState, validate) {
+export default function FormHandler(initialState, validate, navigate) {
   const [values, setValues] = useState(initialState);
   const [errors, setErrors] = useState({});
-  const [isSubmitting, setSubmitting] = useState(true);
+  const [isSubmitting, setSubmitting] = useState(false);
   const [dbError, setDBError] = useState(null);
 
   useEffect(() => {
-    console.log(isSubmitting)
     if(isSubmitting) {
       const noErrors = Object.keys(errors).length === 0;
+      console.log(noErrors)
       if(noErrors) {
-        console.log(values);
+        login();
         setSubmitting(false);
       } else {
         setSubmitting(false);
@@ -19,21 +19,29 @@ export default function FormHandler(initialState, validate) {
     }
   }, [errors]);
 
-  function handleChange(e) {
+  function login() {
+    if(values.username === 'vito') {
+      if(values.password === 'rkcvolley') {
+        navigate();
+      }
+    }
+  }
+
+  function handleChange(text, name) {
     setValues({
       ...values,
-      [e.target.name]: e.target.value
+      [name]: text
     });
   }
 
   function handleBlur() {
     const validationErrors = validate(values);
-    setErrors(validationErrors);
   }
 
   function submit(e) {
     e.preventDefault();
     const validationErrors = validate(values);
+    setErrors(validationErrors);
     setSubmitting(true);
   }
 
