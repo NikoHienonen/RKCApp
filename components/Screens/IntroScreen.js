@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { ScreenOrientation } from 'expo';
 
 export default class GameScreen extends Component {
   static navigationOptions = ({navigation}) => {
@@ -11,6 +12,9 @@ export default class GameScreen extends Component {
       headerTintColor: 'orange' 
     };
   };
+  componentDidMount() {
+    ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
+  }
   /**
    * <FontAwesomeIcon icon={"fa-sign-in-alt"}/>
    *<FontAwesomeIcon icon={"volleyballBall"}/>
@@ -61,7 +65,8 @@ const styles = StyleSheet.create({
   textContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: "50%"
+    height: "50%",
+    marginHorizontal: 10
   },
   innerText: {
     color: 'white',

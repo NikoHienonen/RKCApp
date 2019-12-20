@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, TextInput, Switch, StyleSheet } from 'react-native';
-
+import { ScreenOrientation } from 'expo';
 export default function PreGameForm(props) {
   const { rounds, points, bestOf, onChangeText, toggleBestOf } = props;
   return (

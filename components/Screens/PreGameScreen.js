@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 import PreGameForm from '../PreGame/PreGameForm';
+import { ScreenOrientation } from 'expo';
 
 export default class PreGameScreen extends Component {
   static navigationOptions = ({navigation}) => {
@@ -16,6 +17,9 @@ export default class PreGameScreen extends Component {
     maxPoints: 3, 
     maxRounds: 4, 
     bestOfMaxRounds: false
+  }
+  componentDidMount() {
+    ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
   }
   onChangeText = (value, text) => {
     if(!isNaN(text)) {
