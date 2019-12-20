@@ -41,7 +41,7 @@ export default class PreGameScreen extends Component {
     const { maxPoints, maxRounds, bestOfMaxRounds } = this.state;
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Welcome to RKC-Volley App!</Text>
+        <Text style={styles.title}>Select your game stats</Text>
         <PreGameForm rounds={maxRounds} points={maxPoints} bestOf={bestOfMaxRounds} 
         onChangeText={this.onChangeText} toggleBestOf={this.toggleBestOf} />
         <TouchableOpacity onPress={() => this.readyForNavigation()}
@@ -62,7 +62,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 30,
-    color: 'orange'
+    color: 'orange',
+    textAlign: 'center'
   },
   button: {
     marginTop: 0,
