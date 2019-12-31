@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import Tournaments from '../Tournaments/Tournaments';
 
 
 export default class TournamentScreen extends Component {
@@ -11,13 +12,13 @@ export default class TournamentScreen extends Component {
       headerTintColor: 'orange' 
     };
   };
- navigate = (prop) => {
-   const { navigate } = this.props.navigation;
-   navigate(prop);
- }
+  navigate = _id => {
+    const {navigate} = this.props.navigation;
+    navigate('Login', {tournamentId: _id});
+  }
   render(){
     return <View style={styles.container}>
-      <Text>Tournaments</Text>
+      <Tournaments navigate={this.navigate}/>
     </View>
   }
 }

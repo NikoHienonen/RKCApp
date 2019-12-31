@@ -5,6 +5,9 @@ import { ScreenOrientation } from 'expo';
 import Teams from '../Team/Teams';
 
 export default class GameScreen extends Component {
+  constructor(props) {
+    super(props);
+  }
   /*
   * GameScreen is where the refereeing of a match happens, notice that 
     the screen is locked to horizontal-view, this helps with the layout,
@@ -15,21 +18,35 @@ export default class GameScreen extends Component {
     headerStyle: { backgroundColor: '#413E3A'},
     headerTitleStyle: { color: 'orange' }
   };
+
   componentDidMount() {
     ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
   }
   GameOver = (gameStats) => {
-    const {navigate} = this.props.navigation;
-    navigate('End', {gameStats});
+    const { navigation } = this.props;
+    const {navigate} = navigation;
+    const tournamentId = navigation.getParam('tournamentId');
+    const referee = navigation.getParam('referee');
+    const match = navigation.getParam('match');
+    const sendData = {
+      data: {
+        gameStats: gameStats, 
+        referee: referee,
+        tournamentId: tournamentId,
+        match: match
+      }
+    }
+    navigate('End', sendData);
   } 
   render() {
-    const { navigation } = this.props;
-    let maxPoints = navigation.getParam('maxPoints');
-    let maxRounds = navigation.getParam('maxRounds');
-    let bestOfMaxRounds = navigation.getParam('bestOfMaxRounds');
+    const data = this.props.navigation.getParam('data');
+    const {homeTeam, visitorTeam, maxRounds, maxPoints, timeOuts, 
+      bestOfMaxRounds, winByTwo } = data;
+
     return (
       <View style={styles.container}>
-        <Teams maxPoints={maxPoints} maxRounds={maxRounds} 
+        <Teams maxPoints={maxPoints} maxRounds={maxRounds} homeTeam={homeTeam}
+        visitorTeam={visitorTeam} timeOuts={timeOuts} winByTwo={winByTwo}
         bestOfMaxRounds={bestOfMaxRounds} GameOver={this.GameOver}/>
       </View>
     )

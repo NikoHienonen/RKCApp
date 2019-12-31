@@ -1,9 +1,34 @@
 import React from 'react';
-import { View,Text,  StyleSheet, Image, KeyboardAvoidingView } from 'react-native';
+import { View,Text,  StyleSheet, Image, KeyboardAvoidingView, Alert } from 'react-native';
+
+import axios from 'axios';
 
 import LoginForm from './LoginForm';
 
-export default function Login({navigate}) {
+export default function Login({navigate, tournamentId}) {
+  const userLogin = (referee) => {
+    const url = `https://damp-river-31127.herokuapp.com/api/tournaments/${tournamentId}/referees/login`;
+    axios.post(url, referee)
+        .then(result => {
+          if(result.status === 200) {
+            const data = JSON.parse(result.config.data)
+            const referee = {
+              username: data.username,
+              password: data.password,
+              token: result.data.token
+            }
+            navigate(referee);
+          } else {
+            Alert.alert('Jokin meni vikaan kirjautumisessa',
+            'Ota yhteys turnauksen järjestäjään');
+          }
+        })
+      .catch(err => {
+        console.log(err);
+        Alert.alert('Väärä käyttäjänimi tai salasana',
+        'Tarkista että antamasi tiedot ovat oikein');
+      });
+  }
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.container}>
       <View style={styles.imgContainer}>
@@ -14,7 +39,7 @@ export default function Login({navigate}) {
          </Text>
       </View>
       <View style={styles.form}>
-        <LoginForm navigate={navigate}/>
+        <LoginForm navigate={navigate} userLogin={userLogin}/>
       </View>
     </KeyboardAvoidingView>
   );

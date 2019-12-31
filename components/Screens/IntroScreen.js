@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { ScreenOrientation } from 'expo';
 
 export default class GameScreen extends Component {
   static navigationOptions = ({navigation}) => {
@@ -11,14 +11,14 @@ export default class GameScreen extends Component {
       headerTintColor: 'orange' 
     };
   };
-  /**
-   * <FontAwesomeIcon icon={"fa-sign-in-alt"}/>
-   *<FontAwesomeIcon icon={"volleyballBall"}/>
-  */
- navigate = (prop) => {
-   const { navigate } = this.props.navigation;
-   navigate(prop);
- }
+
+  componentDidMount() {
+    ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT);
+  }
+  navigate = (prop) => {
+    const { navigate } = this.props.navigation;
+    navigate(prop);
+  }
   render(){
     return (
       <View style={styles.container}>
@@ -29,7 +29,7 @@ export default class GameScreen extends Component {
             <Text style={styles.innerText}>Click here if you just want to referee a match!</Text>
           </View>
         </TouchableOpacity>
-        <TouchableOpacity onPress={(() => this.navigate('Login'))}
+        <TouchableOpacity onPress={(() => this.navigate('Tournaments'))}
         style={styles.navButton}>
           <View style={styles.textContainer}>
             

@@ -1,11 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { 
   View, 
-  Text, 
-  TouchableOpacity, 
   StyleSheet, 
-  TextInput,
-  Switch
 } from 'react-native';
 
 import Timeout from './Buttons/Timeout';
@@ -14,6 +10,9 @@ import DeletePoint from './Buttons/DeletePoint';
 import Serve from './Buttons/Serve';
 
 export default class Team extends Component {
+  constructor(props) {
+    super(props);
+  }
   switchTimeouts = () => {
     this.setState({timeOuts: 1});
   }
@@ -30,7 +29,21 @@ export default class Team extends Component {
       : <View style={styles.servePlaceholder}></View>;
     } 
   }
-  renderMirror = (points) => {
+  renderTimeOuts = timeOuts => {
+    if(timeOuts === 2 ) {
+      return (
+        <Fragment>
+          <Timeout/> 
+          <Timeout/>
+        </Fragment>
+        );
+    } else if (timeOuts === 1) {
+      return <Timeout />;
+    } else {
+      return null;
+    }
+  }
+  renderMirror = (points, timeOuts) => {
     return this.props.name === 'team1'
     ? (
       <View style={styles.row}>
@@ -38,8 +51,7 @@ export default class Team extends Component {
         AddPoint={this.props.AddPoint}/>
         <View style={[styles.column, styles.buttonColumn]}>
           {this.renderServe()}
-          <Timeout />
-          <Timeout />
+          {this.renderTimeOuts(timeOuts)}
           <DeletePoint name={this.props.name} 
         DeletePoint={this.props.DeletePoint}/>
         </View>
@@ -49,8 +61,7 @@ export default class Team extends Component {
       <View style={styles.row}>
         <View style={[styles.column, styles.buttonColumn]}>
           {this.renderServe()}
-          <Timeout />
-          <Timeout />
+          {this.renderTimeOuts(timeOuts)}
           <DeletePoint name={this.props.name} 
         DeletePoint={this.props.DeletePoint}/>
         </View>
@@ -60,10 +71,10 @@ export default class Team extends Component {
     )
   } 
   render() {
-    const { points } = this.props;
+    const { points, timeOuts } = this.props;
     return (
       <View style={styles.container}>
-        {this.renderMirror(points)}
+        {this.renderMirror(points, timeOuts)}
       </View>
     )
   }

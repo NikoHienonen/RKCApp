@@ -5,18 +5,19 @@ import Team from './Team';
 import Input from './Input';
 
 export default class Teams extends Component {
-  state = {
-    team1: 'Team1',       // Name of team1
-    team2: 'Team2',       // Name of team2
-    team1Points: 0,       // Points of team1
-    team2Points: 0,       // Points of team1
-    roundsWon: [0, 0],    // A list of how many rounds each team has won.
-    roundStatistics: [],  // A list of how many points each team got in a rounds
-    serveOnTeam1: true    // Is team1 serving
-  }
-  componentDidMount() {
-    let rounds = this.props.maxRounds;
-    console.log(typeof rounds)
+  constructor(props) {
+    super(props);
+    const { homeTeam, visitorTeam, timeOuts } = this.props;
+    this.state = {
+      team1: homeTeam ? homeTeam : 'Team1',
+      team2: visitorTeam ? visitorTeam : 'Team2',
+      timeOuts: timeOuts,
+      team1Points: 0,       // Points of team1
+      team2Points: 0,       // Points of team1
+      roundsWon: [0, 0],    // A list of how many rounds each team has won.
+      roundStatistics: [],  // A list of how many points each team got in a rounds
+      serveOnTeam1: true    // Is team1 serving
+    };
   }
   EndRound = (winner) => {
     let index = winner === 'team1' ? 0 : 1;
@@ -61,9 +62,32 @@ export default class Teams extends Component {
       roundsWon,
       roundStatistics 
     };
-    this.setState({roundsWon: [0, 0], roundStatistics: []})
+    this.setState({roundsWon: [0, 0], roundStatistics: []});
     return stats;
   }
+
+   roundWinCheck = (team, teamPoints, maxPoints) => {
+     const { winByTwo } = this.props;
+     const otherTeamPoints = () => team === 'team1' 
+     ? this.state.team2Points 
+     : this.state.team1Points;
+     if(winByTwo && teamPoints >= maxPoints) {
+       // If winByTwo is active and the parameter team's points are above the limit
+       if(teamPoints - otherTeamPoints() !== 1) {
+         // If the difference between the points is not 1, the parameter has won 
+         return true
+       } else {
+         return false
+       }
+     } else if (teamPoints === maxPoints) {
+       // Else if winByTwo is not active, parameter team wins if they have points
+       // equal to max.
+       return true
+     } else {
+       return false
+     }
+   } 
+  
   AddPoint = (team) => {
     let maxPointsNum = Number(this.props.maxPoints);
     if(team === 'team1') {
@@ -72,7 +96,7 @@ export default class Teams extends Component {
         this.setState({serveOnTeam1: true});
       }
       this.setState({team1Points}, () => {
-        if(team1Points === maxPointsNum) {
+        if(this.roundWinCheck(team, team1Points, maxPointsNum)){
           this.EndRound('team1');
         }
       });
@@ -82,7 +106,7 @@ export default class Teams extends Component {
         this.setState({serveOnTeam1: false});
       }
       this.setState({team2Points}, () => {
-        if(team2Points === maxPointsNum) {
+        if(this.roundWinCheck(team, team2Points, maxPointsNum)){
           this.EndRound('team2');
         }
       });
@@ -125,7 +149,7 @@ export default class Teams extends Component {
     this.setState({pointsA, pointsB}, () => {console.log(this.state)});
   }*/
   render() {
-    const { team1, team2, team1Points, team2Points, serveOnTeam1, roundsWon} = this.state;
+    const { team1, team2, team1Points, team2Points, serveOnTeam1, roundsWon, timeOuts} = this.state;
     return (
     <View style={[styles.row, styles.wrapper]}>
       <View style={[styles.mainContainer, styles.column]}>
@@ -137,6 +161,7 @@ export default class Teams extends Component {
         <Team name='team1' points={team1Points}
           AddPoint={this.AddPoint} DeletePoint={this.DeletePoint}
           hasServe={serveOnTeam1} toggleServe={this.toggleServe}
+          timeOuts={timeOuts}
         />
       </View>
       <View style={[styles.mainContainer, styles.column]}>
@@ -148,6 +173,7 @@ export default class Teams extends Component {
         <Team name='team2' points={team2Points}
           AddPoint={this.AddPoint} DeletePoint={this.DeletePoint}
           hasServe={serveOnTeam1} toggleServe={this.toggleServe}
+          timeOuts={timeOuts}
         />
       </View>
     </View>

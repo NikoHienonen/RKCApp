@@ -9,10 +9,10 @@ const INITIAL_STATE = {
   password: ''
 }
 
-export default function LoginForm({navigate}) {
+export default function LoginForm({navigate, userLogin}) {
   const {
     handleChange, handleBlur, submit, errors, values, isSubmitting
-  } = FormHandler(INITIAL_STATE, ValidateValues, navigate);
+  } = FormHandler(INITIAL_STATE, ValidateValues, navigate, userLogin);
 
   return (
     <View style={styles.container}>
