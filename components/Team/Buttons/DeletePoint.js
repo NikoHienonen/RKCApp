@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   minusPoint: {
     backgroundColor: 'orange',
     paddingHorizontal: 0,
-    paddingVertical: 3,
+    paddingVertical: "1.5%",
     alignContent: 'center'
   },
   minusPointText :{

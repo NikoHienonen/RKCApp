@@ -187,9 +187,9 @@ const styles = StyleSheet.create({
     margin: 'auto'
   },
   mainContainer: {
-    marginHorizontal: 30,
+    margin: "2%",
     flex: 1,
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
   },
   row: {
     flexDirection: 'row',
@@ -200,7 +200,6 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 20,
     textAlign: 'center',
-    marginVertical: 10
   },
   rounds: {
     color: 'white',
