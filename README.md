@@ -10,10 +10,12 @@ A mobile application for volleyball referees utilizing react native and created 
 * [Status](#status)
 
 ## General info
-The application allows volleyball referees to keep track of a game of volleyball they
-are refereeing and track the timeouts and round wins. In the future, a client that 
-uses this app can create leagues or tournaments and fetch matches to referee with 
-this application.
+The Volleyball App of RKC-Volley. They use this to organize tournaments and referee their home games.
+The project has two parts, the native app and an api backend. From the api, the client can manage
+tournaments through a ReactJS interface. The code is sloppy at times, this was from the deadline
+requirements, in the future I might review the code a bit and clean it up. 
+Link to the backend-Repo : https://github.com/NikoHienonen/RKC_site
+
 	
 ## Technologies
 Project is created with:
@@ -30,5 +32,5 @@ you can follow the following steps to run this application:
 * 5. Run 'npm start' to start the application 
 
 ## Status
-version: 1.0.1
-The app is in production currently.
+version: 1.1.1
+The app is in finished.
