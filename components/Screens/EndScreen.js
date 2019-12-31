@@ -115,8 +115,8 @@ export default class GameScreen extends Component {
         {
           !data.referee
           ? null
-          : <TouchableOpacity onPress={() => this.saveMatchData(data)}>
-              <Text>Tallenna tulos</Text>
+          : <TouchableOpacity onPress={() => this.saveMatchData(data)} style={styles.save}>
+              <Text style={styles.saveText}>Tallenna tulos</Text>
             </TouchableOpacity>
         }
       </View>
@@ -129,16 +129,27 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#413E3A',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'space-around'
   },
   title: {
-    fontSize: 50,
+    fontSize: 45,
     color: 'orange'
   },
   results: {
-    fontSize: 40,
+    fontSize: 35,
     textAlign: 'center',
-    marginVertical: 10,
     color: 'orange'
+  },
+  save: {
+    backgroundColor: 'orange',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: "50%"
+  },
+  saveText: {
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 20,
+    paddingVertical: "2%"
   }
 });

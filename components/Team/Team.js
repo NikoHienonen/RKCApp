@@ -82,7 +82,7 @@ export default class Team extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 20
+    marginVertical: "8%"
   },
   row: {
     flexDirection: 'row'
@@ -92,10 +92,10 @@ const styles = StyleSheet.create({
   },
   buttonColumn: {
     justifyContent: 'space-between',
-    marginHorizontal: 10,
+    marginHorizontal: "5%",
   },
   servePlaceholder: {
-    height: 40,
-    width: 40
+    height: "23%",
+    width: "23%"
   }
 });
