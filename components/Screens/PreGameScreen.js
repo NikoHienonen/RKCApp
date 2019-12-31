@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { ScreenOrientation } from 'expo';
 
 import PreGameForm from '../PreGame/PreGameForm';
-import { TouchableNativeFeedback } from 'react-native-gesture-handler';
 
 export default class PreGameScreen extends Component {
   static navigationOptions = ({navigation}) => {
