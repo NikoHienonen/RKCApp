@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { ScreenOrientation } from 'expo';
 
-
 import PreGameForm from '../PreGame/PreGameForm';
 import { TouchableNativeFeedback } from 'react-native-gesture-handler';
 

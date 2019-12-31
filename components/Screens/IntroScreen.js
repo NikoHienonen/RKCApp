@@ -61,7 +61,8 @@ const styles = StyleSheet.create({
   textContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: "50%"
+    height: "50%",
+    marginHorizontal: 10
   },
   innerText: {
     color: 'white',

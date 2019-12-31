@@ -28,7 +28,10 @@
       "bundleIdentifier": "com.nikoh.rkcapp"
     },
     "android": {
-      "package": "com.nikoh.rkcapp"
+      "package": "com.nikoh.rkcapp",
+      "splash": {
+        "resizeMode": "native"
+      }
     }
   }
 }

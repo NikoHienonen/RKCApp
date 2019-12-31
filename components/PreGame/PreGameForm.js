@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, TextInput, Switch, StyleSheet } from 'react-native';
-
+import { ScreenOrientation } from 'expo';
 export default function PreGameForm(props) {
   const { maxRounds, maxPoints, bestOfMaxRounds, onChangeText, toggleBestOf,
   toggleWinByTwo, winByTwo, timeOuts } = props;
@@ -35,7 +35,7 @@ export default function PreGameForm(props) {
 
 const styles = StyleSheet.create({
   inputContainer: {
-    flex: 1,
+    paddingVertical: 10,
     justifyContent:'center',
   },
   input: {
