@@ -66,37 +66,38 @@ export default class Teams extends Component {
     return stats;
   }
 
-   roundWinCheck = (team, teamPoints, maxPoints) => {
-     const { winByTwo } = this.props;
-     const otherTeamPoints = () => team === 'team1' 
-     ? this.state.team2Points 
-     : this.state.team1Points;
-     if(winByTwo && teamPoints >= maxPoints) {
-       // If winByTwo is active and the parameter team's points are above the limit
-       if(teamPoints - otherTeamPoints() !== 1) {
-         // If the difference between the points is not 1, the parameter has won 
-         return true
-       } else {
-         return false
-       }
-     } else if (teamPoints === maxPoints) {
-       // Else if winByTwo is not active, parameter team wins if they have points
-       // equal to max.
-       return true
-     } else {
-       return false
-     }
-   } 
+  roundWinCheck = (t1Points, t2Points) => {
+    // Notice that the team names do NOT correspond the state names
+    const { winByTwo, maxPoints } = this.props;
+    let maxPointsNum = Number(maxPoints);
+    let returnValue = false;
+    if(t1Points >= maxPointsNum) {
+      // If the team has at least or over the maxPoints
+      if(winByTwo) {
+        if(t1Points > t2Points && t1Points - t2Points !== 1) {
+          returnValue = true;
+        } else {
+          returnValue = false;
+        }
+      } else {
+        // If no winByTwo, the team has won the rounds, return true
+        returnValue = true;
+      }
+    } else {
+      // Team has NOT reached the maximum points, return false
+      returnValue = false;
+    }
+    return returnValue;
+  }
   
   AddPoint = (team) => {
-    let maxPointsNum = Number(this.props.maxPoints);
     if(team === 'team1') {
       let team1Points = this.state.team1Points + 1
       if(!this.state.serveOnTeam1){
         this.setState({serveOnTeam1: true});
       }
       this.setState({team1Points}, () => {
-        if(this.roundWinCheck(team, team1Points, maxPointsNum)){
+        if(this.roundWinCheck(team1Points, this.state.team2Points)){
           this.EndRound('team1');
         }
       });
@@ -106,7 +107,7 @@ export default class Teams extends Component {
         this.setState({serveOnTeam1: false});
       }
       this.setState({team2Points}, () => {
-        if(this.roundWinCheck(team, team2Points, maxPointsNum)){
+        if(this.roundWinCheck(team2Points, this.state.team1Points)){
           this.EndRound('team2');
         }
       });
