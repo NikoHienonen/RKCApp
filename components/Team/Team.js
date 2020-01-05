@@ -58,7 +58,7 @@ export default class Team extends Component {
       </View>
     )
     :(
-      <View style={styles.row}>
+      <View style={[styles.row, styles.mLeft]}>
         <View style={[styles.column, styles.buttonColumn]}>
           {this.renderServe()}
           {this.renderTimeOuts(timeOuts)}
@@ -82,13 +82,16 @@ export default class Team extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: "8%"
+    marginVertical: '3%'
   },
   row: {
     flexDirection: 'row'
   },
   column: {
     flexDirection: 'column'
+  },
+  mLeft: {
+    marginLeft: '5%'
   },
   buttonColumn: {
     justifyContent: 'space-between',
