@@ -6,7 +6,6 @@ import axios from 'axios';
 export default class GameScreen extends Component {
   constructor(props) {
     super(props);
-    console.log('päästiin endgamee asti')
   }
   static navigationOptions = ({navigation}) => {
     //let repo = navigation.getParam('gameStarts');
@@ -52,7 +51,7 @@ export default class GameScreen extends Component {
     const url = `https://damp-river-31127.herokuapp.com/api/tournaments/${tournamentId}/matches/played/${match._id}`;
     const body = this.matchDataCreator(gameStats);
     const header = this.getHeader(referee);
-    console.log(url, body, header);
+
     axios.patch(url, body, header)
       .then(result => { 
         if(result.status === 201) {
@@ -100,7 +99,6 @@ export default class GameScreen extends Component {
   }
   render() {
     const data = this.props.navigation.getParam('data');
-    console.log(data.gameStats)
     const {
       team1,
       team2,

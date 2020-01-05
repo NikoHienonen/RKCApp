@@ -2,6 +2,8 @@ import React, { useState, useEffect, Fragment} from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
 import axios from 'axios';
 
+import RefreshButton from '../Team/Buttons/RefreshButton';
+
 export default function Tournaments({navigate}) {
   const [tournaments, setTournaments] = useState(null);
   useEffect(() => {
@@ -13,9 +15,10 @@ export default function Tournaments({navigate}) {
         })
         .catch(err => console.log(err))
     }
-  }, []); 
+  }, [tournaments]); 
   return (
     <Fragment>
+      <RefreshButton func={() => setTournaments(null)}/>
       {
         !tournaments
         ? <Text style={styles.error}>Ei turnauksia!</Text>

@@ -2,11 +2,12 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { Text, View, FlatList, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import axios from 'axios';
 
+import RefreshButton from '../Team/Buttons/RefreshButton';
+
 export default function Matches({tournamentId, referee, navigate}) {
   const [matches, setMatches] = useState(null);
-  const [fetchDone, toggleFetchDone] = useState(false);
   useEffect(() => {
-    if(!fetchDone) {
+    if(!matches) {
       const url = `https://damp-river-31127.herokuapp.com/api/tournaments/${tournamentId}/matches/byReferee/${referee.username}`;
 
       axios.get(url, getHeader())
@@ -16,14 +17,12 @@ export default function Matches({tournamentId, referee, navigate}) {
             return match.homeRoundsWon === 0 && match.visitorRoundsWon === 0;
           })
           setMatches(filteredData);
-          toggleFetchDone(true);
         })
         .catch(err => {
           console.log(err);
-          toggleFetchDone(true);
         });
     }
-  }, []); 
+  }, [matches]); 
 
 
   getHeader = () => {
@@ -52,6 +51,7 @@ export default function Matches({tournamentId, referee, navigate}) {
   }
   return (
     <Fragment>
+      <RefreshButton func={() => setMatches(null)}/>
       {
         !matches || matches.length === 0
         ? <Text style={styles.error}>Ei otteluita vielä!</Text>
