@@ -24,7 +24,6 @@ export default function Login({navigate, tournamentId}) {
           }
         })
       .catch(err => {
-        console.log(err);
         Alert.alert('Väärä käyttäjänimi tai salasana',
         'Tarkista että antamasi tiedot ovat oikein');
       });

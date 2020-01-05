@@ -4,11 +4,11 @@ import axios from 'axios';
 
 export default function Matches({tournamentId, referee, navigate}) {
   const [matches, setMatches] = useState(null);
-  console.log(referee)
+  const [fetchDone, toggleFetchDone] = useState(false);
   useEffect(() => {
-    if(!matches) {
+    if(!fetchDone) {
       const url = `https://damp-river-31127.herokuapp.com/api/tournaments/${tournamentId}/matches/byReferee/${referee.username}`;
-      console.log(url)
+
       axios.get(url, getHeader())
         .then(result => {
           const data = result.data.matches;
@@ -16,8 +16,12 @@ export default function Matches({tournamentId, referee, navigate}) {
             return match.homeRoundsWon === 0 && match.visitorRoundsWon === 0;
           })
           setMatches(filteredData);
+          toggleFetchDone(true);
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+          console.log(err);
+          toggleFetchDone(true);
+        });
     }
   }, []); 
 

@@ -30,6 +30,7 @@ export default class Teams extends Component {
   SaveAndResetPoints = () => {
     let roundStatistics = this.state.roundStatistics;
     roundStatistics.push(this.state.team1Points, this.state.team2Points);
+    console.log(roundStatistics)
     this.setState({roundStatistics}, () => {
       this.setState({team1Points: 0, team2Points: 0}, () => {
         if(this.CheckIfSomeoneHasWon()){
@@ -140,6 +141,23 @@ export default class Teams extends Component {
       serveOnTeam1: !prevState.serveOnTeam1
     }));
   }
+  createStatString = (results) => {
+    let resultString = '[';
+    if(results.length !== 0) {
+      for(i = 0; i < results.length; i++){
+        resultString = resultString+results[i];
+        let separator = i % 2 == 0 ? ' - ' : ', ';
+        if(i !== results.length-1){
+          resultString = resultString+separator;
+        } else {
+          resultString = resultString + ']';
+        }
+      }
+    } else {
+      resultString = resultString + ' ]';
+    }
+    return resultString;
+  }
   /*
   CollectDataAfterGameOver = (stats) => {
     this.props.GameOver(stats);
@@ -150,9 +168,12 @@ export default class Teams extends Component {
     this.setState({pointsA, pointsB}, () => {console.log(this.state)});
   }*/
   render() {
-    const { team1, team2, team1Points, team2Points, serveOnTeam1, roundsWon, timeOuts} = this.state;
+    const { team1, team2, team1Points, team2Points, serveOnTeam1, roundsWon, timeOuts,
+      roundStatistics} = this.state;
     return (
-    <View style={[styles.row, styles.wrapper]}>
+    <View style={[styles.column, styles.wrapper]}>
+      <Text style={styles.prevRounds}>{this.createStatString(roundStatistics)}</Text>
+      <View style={styles.row}>
       <View style={[styles.mainContainer, styles.column]}>
         <View style={styles.row}>
           <Input value={team1} placeholder='Team1' name='team1'
@@ -178,19 +199,20 @@ export default class Teams extends Component {
         />
       </View>
     </View>
+    </View>
     )
   }
 }
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    justifyContent: 'flex-end',
-    margin: 'auto'
+    margin: 'auto',
+    justifyContent: 'space-around'
   },
   mainContainer: {
     margin: "2%",
     flex: 1,
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
   },
   row: {
     flexDirection: 'row',
@@ -205,5 +227,11 @@ const styles = StyleSheet.create({
   rounds: {
     color: 'white',
     fontSize: 35
+  },
+  prevRounds: {
+    color: 'white',
+    fontSize: 20,
+    textAlign: 'center',
+    marginTop: '1%'
   }
 })
