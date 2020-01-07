@@ -13,9 +13,6 @@ export default class Team extends Component {
   constructor(props) {
     super(props);
   }
-  switchTimeouts = () => {
-    this.setState({timeOuts: 1});
-  }
   renderServe = () => {
     if(this.props.name === 'team1') {
       return this.props.hasServe
@@ -30,14 +27,15 @@ export default class Team extends Component {
     } 
   }
   renderTimeOuts = timeOuts => {
-    if(timeOuts === 2 ) {
+    console.log(typeof timeOuts);
+    if(Number(timeOuts) === 2 ) {
       return (
         <Fragment>
           <Timeout/> 
           <Timeout/>
         </Fragment>
         );
-    } else if (timeOuts === 1) {
+    } else if (Number(timeOuts) === 1) {
       return <Timeout />;
     } else {
       return null;
