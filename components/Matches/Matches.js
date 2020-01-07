@@ -6,6 +6,7 @@ import RefreshButton from '../Team/Buttons/RefreshButton';
 
 export default function Matches({tournamentId, referee, navigate}) {
   const [matches, setMatches] = useState(null);
+
   useEffect(() => {
     if(!matches) {
       const url = `https://damp-river-31127.herokuapp.com/api/tournaments/${tournamentId}/matches/byReferee/${referee.username}`;
@@ -16,7 +17,8 @@ export default function Matches({tournamentId, referee, navigate}) {
           const filteredData = data.filter(match => {
             return match.homeRoundsWon === 0 && match.visitorRoundsWon === 0;
           })
-          setMatches(filteredData);
+          const sortedData = [...filteredData].sort(compare);
+          setMatches(sortedData);
         })
         .catch(err => {
           console.log(err);
@@ -24,6 +26,9 @@ export default function Matches({tournamentId, referee, navigate}) {
     }
   }, [matches]); 
 
+  const compare = (a, b) => {
+    return a.startingTime.localeCompare(b.startingTime);
+  }  
 
   getHeader = () => {
     return {
