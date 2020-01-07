@@ -27,7 +27,6 @@ export default class Team extends Component {
     } 
   }
   renderTimeOuts = timeOuts => {
-    console.log(typeof timeOuts);
     if(Number(timeOuts) === 2 ) {
       return (
         <Fragment>
