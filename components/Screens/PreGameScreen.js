@@ -14,7 +14,7 @@ export default class PreGameScreen extends Component {
     };
   };
   componentDidMount() {
-    ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT);
+    ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
     const { getParam } = this.props.navigation;
     const match = getParam('match');
     if(match) {
